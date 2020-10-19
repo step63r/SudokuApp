@@ -7,6 +7,7 @@ namespace SudokuApp.Models
     /// <summary>
     /// 数独の盤面情報クラス
     /// </summary>
+    [Serializable]
     public class Sudoku
     {
         #region メンバ変数
