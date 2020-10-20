@@ -1,9 +1,24 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:SudokuApp.ViewModels"
+             xmlns:conv="clr-namespace:SudokuApp.Converters"
              x:Class="SudokuApp.Controls.SudokuControl">
+    <ContentView.BindingContext>
+        <vm:SudokuControlViewModel/>
+    </ContentView.BindingContext>
     <ContentView.Resources>
-        <Style TargetType="Entry">
+        <x:Int32 x:Key="0">0</x:Int32>
+        <x:Int32 x:Key="1">1</x:Int32>
+        <x:Int32 x:Key="2">2</x:Int32>
+        <x:Int32 x:Key="3">3</x:Int32>
+        <x:Int32 x:Key="4">4</x:Int32>
+        <x:Int32 x:Key="5">5</x:Int32>
+        <x:Int32 x:Key="6">6</x:Int32>
+        <x:Int32 x:Key="7">7</x:Int32>
+        <x:Int32 x:Key="8">8</x:Int32>
+        <conv:MultiDimensionalConverter x:Key="MultiDimensionalConverter"/>
+        <Style x:Key="SudokuCell" TargetType="{x:Type Entry}">
             <Setter Property="HorizontalTextAlignment" Value="Center"/>
             <Setter Property="Keyboard" Value="Numeric"/>
             <Setter Property="FontSize" Value="32"/>
@@ -33,15 +48,87 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Entry Text="0" Grid.Row="0" Grid.Column="0"/>
-                <Entry Text="0" Grid.Row="0" Grid.Column="1"/>
-                <Entry Text="0" Grid.Row="0" Grid.Column="2"/>
-                <Entry Text="0" Grid.Row="1" Grid.Column="0"/>
-                <Entry Text="0" Grid.Row="1" Grid.Column="1"/>
-                <Entry Text="0" Grid.Row="1" Grid.Column="2"/>
-                <Entry Text="0" Grid.Row="2" Grid.Column="0"/>
-                <Entry Text="0" Grid.Row="2" Grid.Column="1"/>
-                <Entry Text="0" Grid.Row="2" Grid.Column="2"/>
+                <Entry Style="{DynamicResource SudokuCell}" Grid.Row="0" Grid.Column="0">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 0}"/>
+                            <Binding Source="{StaticResource 0}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="1">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 0}"/>
+                            <Binding Source="{StaticResource 1}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="2">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 0}"/>
+                            <Binding Source="{StaticResource 2}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="0">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 1}"/>
+                            <Binding Source="{StaticResource 0}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="1">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 1}"/>
+                            <Binding Source="{StaticResource 1}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="2">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 1}"/>
+                            <Binding Source="{StaticResource 2}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="0">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 2}"/>
+                            <Binding Source="{StaticResource 0}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="1">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 2}"/>
+                            <Binding Source="{StaticResource 1}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="2">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 2}"/>
+                            <Binding Source="{StaticResource 2}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
             </Grid>
             <!-- ボックス (0, 1) -->
             <Grid Grid.Row="0" Grid.Column="1">
@@ -55,15 +142,87 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Entry Text="0" Grid.Row="0" Grid.Column="0"/>
-                <Entry Text="0" Grid.Row="0" Grid.Column="1"/>
-                <Entry Text="0" Grid.Row="0" Grid.Column="2"/>
-                <Entry Text="0" Grid.Row="1" Grid.Column="0"/>
-                <Entry Text="0" Grid.Row="1" Grid.Column="1"/>
-                <Entry Text="0" Grid.Row="1" Grid.Column="2"/>
-                <Entry Text="0" Grid.Row="2" Grid.Column="0"/>
-                <Entry Text="0" Grid.Row="2" Grid.Column="1"/>
-                <Entry Text="0" Grid.Row="2" Grid.Column="2"/>
+                <Entry Style="{DynamicResource SudokuCell}" Grid.Row="0" Grid.Column="0">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 0}"/>
+                            <Binding Source="{StaticResource 3}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="1">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 0}"/>
+                            <Binding Source="{StaticResource 4}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="2">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 0}"/>
+                            <Binding Source="{StaticResource 5}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="0">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 1}"/>
+                            <Binding Source="{StaticResource 3}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="1">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 1}"/>
+                            <Binding Source="{StaticResource 4}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="2">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 1}"/>
+                            <Binding Source="{StaticResource 5}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="0">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 2}"/>
+                            <Binding Source="{StaticResource 3}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="1">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 2}"/>
+                            <Binding Source="{StaticResource 4}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="2">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 2}"/>
+                            <Binding Source="{StaticResource 5}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
             </Grid>
             <!-- ボックス (0, 2) -->
             <Grid Grid.Row="0" Grid.Column="2">
@@ -77,15 +236,87 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Entry Text="0" Grid.Row="0" Grid.Column="0"/>
-                <Entry Text="0" Grid.Row="0" Grid.Column="1"/>
-                <Entry Text="0" Grid.Row="0" Grid.Column="2"/>
-                <Entry Text="0" Grid.Row="1" Grid.Column="0"/>
-                <Entry Text="0" Grid.Row="1" Grid.Column="1"/>
-                <Entry Text="0" Grid.Row="1" Grid.Column="2"/>
-                <Entry Text="0" Grid.Row="2" Grid.Column="0"/>
-                <Entry Text="0" Grid.Row="2" Grid.Column="1"/>
-                <Entry Text="0" Grid.Row="2" Grid.Column="2"/>
+                <Entry Style="{DynamicResource SudokuCell}" Grid.Row="0" Grid.Column="0">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 0}"/>
+                            <Binding Source="{StaticResource 6}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="1">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 0}"/>
+                            <Binding Source="{StaticResource 7}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="2">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 0}"/>
+                            <Binding Source="{StaticResource 8}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="0">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 1}"/>
+                            <Binding Source="{StaticResource 6}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="1">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 1}"/>
+                            <Binding Source="{StaticResource 7}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="2">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 1}"/>
+                            <Binding Source="{StaticResource 8}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="0">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 2}"/>
+                            <Binding Source="{StaticResource 6}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="1">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 2}"/>
+                            <Binding Source="{StaticResource 7}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="2">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 2}"/>
+                            <Binding Source="{StaticResource 8}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
             </Grid>
 
             <!-- ボックス (1, 0) -->
@@ -100,15 +331,87 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Entry Text="0" Grid.Row="0" Grid.Column="0"/>
-                <Entry Text="0" Grid.Row="0" Grid.Column="1"/>
-                <Entry Text="0" Grid.Row="0" Grid.Column="2"/>
-                <Entry Text="0" Grid.Row="1" Grid.Column="0"/>
-                <Entry Text="0" Grid.Row="1" Grid.Column="1"/>
-                <Entry Text="0" Grid.Row="1" Grid.Column="2"/>
-                <Entry Text="0" Grid.Row="2" Grid.Column="0"/>
-                <Entry Text="0" Grid.Row="2" Grid.Column="1"/>
-                <Entry Text="0" Grid.Row="2" Grid.Column="2"/>
+                <Entry Style="{DynamicResource SudokuCell}" Grid.Row="0" Grid.Column="0">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 3}"/>
+                            <Binding Source="{StaticResource 0}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="1">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 3}"/>
+                            <Binding Source="{StaticResource 1}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="2">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 3}"/>
+                            <Binding Source="{StaticResource 2}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="0">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 4}"/>
+                            <Binding Source="{StaticResource 0}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="1">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 4}"/>
+                            <Binding Source="{StaticResource 1}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="2">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 4}"/>
+                            <Binding Source="{StaticResource 2}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="0">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 5}"/>
+                            <Binding Source="{StaticResource 0}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="1">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 5}"/>
+                            <Binding Source="{StaticResource 1}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="2">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 5}"/>
+                            <Binding Source="{StaticResource 2}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
             </Grid>
             <!-- ボックス (1, 1) -->
             <Grid Grid.Row="1" Grid.Column="1">
@@ -122,15 +425,87 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Entry Text="0" Grid.Row="0" Grid.Column="0"/>
-                <Entry Text="0" Grid.Row="0" Grid.Column="1"/>
-                <Entry Text="0" Grid.Row="0" Grid.Column="2"/>
-                <Entry Text="0" Grid.Row="1" Grid.Column="0"/>
-                <Entry Text="0" Grid.Row="1" Grid.Column="1"/>
-                <Entry Text="0" Grid.Row="1" Grid.Column="2"/>
-                <Entry Text="0" Grid.Row="2" Grid.Column="0"/>
-                <Entry Text="0" Grid.Row="2" Grid.Column="1"/>
-                <Entry Text="0" Grid.Row="2" Grid.Column="2"/>
+                <Entry Style="{DynamicResource SudokuCell}" Grid.Row="0" Grid.Column="0">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 3}"/>
+                            <Binding Source="{StaticResource 3}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="1">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 3}"/>
+                            <Binding Source="{StaticResource 4}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="2">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 3}"/>
+                            <Binding Source="{StaticResource 5}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="0">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 4}"/>
+                            <Binding Source="{StaticResource 3}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="1">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 4}"/>
+                            <Binding Source="{StaticResource 4}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="2">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 4}"/>
+                            <Binding Source="{StaticResource 5}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="0">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 5}"/>
+                            <Binding Source="{StaticResource 3}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="1">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 5}"/>
+                            <Binding Source="{StaticResource 4}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="2">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 5}"/>
+                            <Binding Source="{StaticResource 5}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
             </Grid>
             <!-- ボックス (1, 2) -->
             <Grid Grid.Row="1" Grid.Column="2">
@@ -144,15 +519,87 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Entry Text="0" Grid.Row="0" Grid.Column="0"/>
-                <Entry Text="0" Grid.Row="0" Grid.Column="1"/>
-                <Entry Text="0" Grid.Row="0" Grid.Column="2"/>
-                <Entry Text="0" Grid.Row="1" Grid.Column="0"/>
-                <Entry Text="0" Grid.Row="1" Grid.Column="1"/>
-                <Entry Text="0" Grid.Row="1" Grid.Column="2"/>
-                <Entry Text="0" Grid.Row="2" Grid.Column="0"/>
-                <Entry Text="0" Grid.Row="2" Grid.Column="1"/>
-                <Entry Text="0" Grid.Row="2" Grid.Column="2"/>
+                <Entry Style="{DynamicResource SudokuCell}" Grid.Row="0" Grid.Column="0">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 3}"/>
+                            <Binding Source="{StaticResource 6}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="1">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 3}"/>
+                            <Binding Source="{StaticResource 7}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="2">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 3}"/>
+                            <Binding Source="{StaticResource 8}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="0">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 4}"/>
+                            <Binding Source="{StaticResource 6}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="1">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 4}"/>
+                            <Binding Source="{StaticResource 7}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="2">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 4}"/>
+                            <Binding Source="{StaticResource 8}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="0">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 5}"/>
+                            <Binding Source="{StaticResource 6}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="1">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 5}"/>
+                            <Binding Source="{StaticResource 7}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="2">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 5}"/>
+                            <Binding Source="{StaticResource 8}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
             </Grid>
 
             <!-- ボックス (2, 0) -->
@@ -167,15 +614,87 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Entry Text="0" Grid.Row="0" Grid.Column="0"/>
-                <Entry Text="0" Grid.Row="0" Grid.Column="1"/>
-                <Entry Text="0" Grid.Row="0" Grid.Column="2"/>
-                <Entry Text="0" Grid.Row="1" Grid.Column="0"/>
-                <Entry Text="0" Grid.Row="1" Grid.Column="1"/>
-                <Entry Text="0" Grid.Row="1" Grid.Column="2"/>
-                <Entry Text="0" Grid.Row="2" Grid.Column="0"/>
-                <Entry Text="0" Grid.Row="2" Grid.Column="1"/>
-                <Entry Text="0" Grid.Row="2" Grid.Column="2"/>
+                <Entry Style="{DynamicResource SudokuCell}" Grid.Row="0" Grid.Column="0">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 6}"/>
+                            <Binding Source="{StaticResource 0}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="1">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 6}"/>
+                            <Binding Source="{StaticResource 1}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="2">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 6}"/>
+                            <Binding Source="{StaticResource 2}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="0">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 7}"/>
+                            <Binding Source="{StaticResource 0}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="1">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 7}"/>
+                            <Binding Source="{StaticResource 1}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="2">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 7}"/>
+                            <Binding Source="{StaticResource 2}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="0">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 8}"/>
+                            <Binding Source="{StaticResource 0}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="1">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 8}"/>
+                            <Binding Source="{StaticResource 1}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="2">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 8}"/>
+                            <Binding Source="{StaticResource 2}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
             </Grid>
             <!-- ボックス (2, 1) -->
             <Grid Grid.Row="2" Grid.Column="1">
@@ -189,15 +708,87 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Entry Text="0" Grid.Row="0" Grid.Column="0"/>
-                <Entry Text="0" Grid.Row="0" Grid.Column="1"/>
-                <Entry Text="0" Grid.Row="0" Grid.Column="2"/>
-                <Entry Text="0" Grid.Row="1" Grid.Column="0"/>
-                <Entry Text="0" Grid.Row="1" Grid.Column="1"/>
-                <Entry Text="0" Grid.Row="1" Grid.Column="2"/>
-                <Entry Text="0" Grid.Row="2" Grid.Column="0"/>
-                <Entry Text="0" Grid.Row="2" Grid.Column="1"/>
-                <Entry Text="0" Grid.Row="2" Grid.Column="2"/>
+                <Entry Style="{DynamicResource SudokuCell}" Grid.Row="0" Grid.Column="0">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 6}"/>
+                            <Binding Source="{StaticResource 3}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="1">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 6}"/>
+                            <Binding Source="{StaticResource 4}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="2">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 6}"/>
+                            <Binding Source="{StaticResource 5}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="0">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 7}"/>
+                            <Binding Source="{StaticResource 3}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="1">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 7}"/>
+                            <Binding Source="{StaticResource 4}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="2">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 7}"/>
+                            <Binding Source="{StaticResource 5}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="0">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 8}"/>
+                            <Binding Source="{StaticResource 3}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="1">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 8}"/>
+                            <Binding Source="{StaticResource 4}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="2">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 8}"/>
+                            <Binding Source="{StaticResource 5}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
             </Grid>
             <!-- ボックス (2, 2) -->
             <Grid Grid.Row="2" Grid.Column="2">
@@ -211,15 +802,87 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Entry Text="0" Grid.Row="0" Grid.Column="0"/>
-                <Entry Text="0" Grid.Row="0" Grid.Column="1"/>
-                <Entry Text="0" Grid.Row="0" Grid.Column="2"/>
-                <Entry Text="0" Grid.Row="1" Grid.Column="0"/>
-                <Entry Text="0" Grid.Row="1" Grid.Column="1"/>
-                <Entry Text="0" Grid.Row="1" Grid.Column="2"/>
-                <Entry Text="0" Grid.Row="2" Grid.Column="0"/>
-                <Entry Text="0" Grid.Row="2" Grid.Column="1"/>
-                <Entry Text="0" Grid.Row="2" Grid.Column="2"/>
+                <Entry Style="{DynamicResource SudokuCell}" Grid.Row="0" Grid.Column="0">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 6}"/>
+                            <Binding Source="{StaticResource 6}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="1">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 6}"/>
+                            <Binding Source="{StaticResource 7}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="2">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 6}"/>
+                            <Binding Source="{StaticResource 8}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="0">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 7}"/>
+                            <Binding Source="{StaticResource 6}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="1">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 7}"/>
+                            <Binding Source="{StaticResource 7}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="2">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 7}"/>
+                            <Binding Source="{StaticResource 8}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="0">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 8}"/>
+                            <Binding Source="{StaticResource 6}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="1">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 8}"/>
+                            <Binding Source="{StaticResource 7}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="2">
+                    <Entry.Text>
+                        <MultiBinding Converter="{StaticResource MultiDimensionalConverter}">
+                            <Binding Path="Sudoku.Field"/>
+                            <Binding Source="{StaticResource 8}"/>
+                            <Binding Source="{StaticResource 8}"/>
+                        </MultiBinding>
+                    </Entry.Text>
+                </Entry>
             </Grid>
         </Grid>
     </ContentView.Content>

@@ -73,50 +73,7 @@ namespace SudokuApp.ViewModels
         /// </summary>
         public void ExecuteSolve()
         {
-            var mySudoku = new Sudoku();
-            string sample = $@"*****3***
-****654**
-*8****7**
-*94******
-*******5*
-*1*9*7*3*
-5*6******
-***8**9**
-*********";
-            using (var reader = new StringReader(sample))
-            {
-                string line = "";
-                var list = new List<string>();
-
-                while ((line = reader.ReadLine()) != null)
-                {
-                    list.Add(line);
-                }
-
-                for (int x = 0; x < 9; ++x)
-                {
-                    line = list[x];
-                    for (int y = 0; y < 9; ++y)
-                    {
-                        // 空マスの場合は何もしない
-                        if (line.Substring(y, 1) == "*")
-                        {
-                            continue;
-                        }
-                        mySudoku.Put(x, y, int.Parse(line.Substring(y, 1)));
-                    }
-                }
-
-                // 数独を解く
-                var results = new List<int[,]>();
-                DepthFirstSearch(ref mySudoku, ref results);
-
-                // デバッグ出力
-                if (results.Count > 0)
-                {
-                    DebugWriteSudokuFormat(results);
-                }
-            }
+            MessagingCenter.Send(this, "ExecuteAsync");
         }
         /// <summary>
         /// 数独の解答が実行可能かどうか
@@ -144,7 +101,7 @@ namespace SudokuApp.ViewModels
             if (!board.FindEmpty(out int x, out int y))
             {
                 // 解に追加
-                results.Add(board.Get());
+                results.Add(board.Field);
 
                 // リターンする前に一回元に戻す
                 board = boardPrev.DeepCopy();

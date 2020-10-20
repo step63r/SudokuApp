@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 namespace SudokuApp.Models
@@ -7,9 +8,33 @@ namespace SudokuApp.Models
     /// <summary>
     /// 数独の盤面情報クラス
     /// </summary>
-    [Serializable]
-    public class Sudoku
+    public class Sudoku : INotifyPropertyChanged
     {
+        #region INotifyPropertyChanged
+        /// <summary>
+        /// PropertyChangedイベントハンドラ
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
+
+        #region プロパティ
+        /// <summary>
+        /// 盤面
+        /// </summary>
+        public int[,] Field
+        {
+            get
+            {
+                return _field;
+            }
+            set
+            {
+                _field = value;
+                PropertyChanged(this, new PropertyChangedEventArgs(nameof(Field)));
+            }
+        }
+        #endregion
+
         #region メンバ変数
         /// <summary>
         /// 盤面
@@ -36,7 +61,7 @@ namespace SudokuApp.Models
             {
                 for (int y = 0; y < 9; ++y)
                 {
-                    _field[x, y] = -1;
+                    Field[x, y] = -1;
                     for (int i = 0; i < 9; ++i)
                     {
                         _nums[x, y, i] = 0;
@@ -47,13 +72,38 @@ namespace SudokuApp.Models
         }
 
         /// <summary>
-        /// 盤面を返す
+        /// 
         /// </summary>
         /// <returns></returns>
-        public int[,] Get()
+        public Sudoku DeepCopy()
         {
-            return _field;
+            var obj = (Sudoku)MemberwiseClone();
+            obj.Field = new int[9, 9];
+            obj._nums = new int[9, 9, 9];
+            obj._choices = new SortedSet<int>[9, 9];
+            for (int x = 0; x < 9; ++x)
+            {
+                for (int y = 0; y < 9; ++y)
+                {
+                    obj.Field[x, y] = Field[x, y];
+                    for (int i = 0; i < 9; ++i)
+                    {
+                        obj._nums[x, y, i] = _nums[x, y, i];
+                    }
+                    obj._choices[x, y] = _choices[x, y];
+                }
+            }
+            return obj;
         }
+
+        ///// <summary>
+        ///// 盤面を返す
+        ///// </summary>
+        ///// <returns></returns>
+        //public int[,] Get()
+        //{
+        //    return _field;
+        //}
 
         /// <summary>
         /// 空きマスのうち、選択肢が最も少ないマスを探す
@@ -69,7 +119,7 @@ namespace SudokuApp.Models
             {
                 for (int j = 0; j < 9; ++j)
                 {
-                    if (_field[i, j] != -1)
+                    if (Field[i, j] != -1)
                     {
                         continue;
                     }
@@ -119,7 +169,7 @@ namespace SudokuApp.Models
             }
 
             // (x2, y2) にすでに値が入っている場合は何もしない
-            if (_field[x2, y2] != -1)
+            if (Field[x2, y2] != -1)
             {
                 return;
             }
@@ -150,7 +200,7 @@ namespace SudokuApp.Models
             }
 
             // (x2, y2) にすでに値が入っている場合は何もしない
-            if (_field[x2, y2] != -1)
+            if (Field[x2, y2] != -1)
             {
                 return;
             }
@@ -174,7 +224,7 @@ namespace SudokuApp.Models
         public void Put(int x, int y, int val)
         {
             // 数値を入れる
-            _field[x, y] = val;
+            Field[x, y] = val;
 
             // マス (x, y) を含む行・列・ブロックへの影響を更新する
             for (int i = 0; i < 9; ++i)
@@ -204,7 +254,7 @@ namespace SudokuApp.Models
         public void Reset(int x, int y)
         {
             // マス (x, y) を含む行・列・ブロックへの影響を更新する
-            int val = _field[x, y];
+            int val = Field[x, y];
             for (int i = 0; i < 9; ++i)
             {
                 ResetDetail(x, y, val, x, i);
@@ -224,7 +274,7 @@ namespace SudokuApp.Models
             }
 
             // 数値を除去する
-            _field[x, y] = -1;
+            Field[x, y] = -1;
         }
 
         /// <summary>
@@ -242,11 +292,11 @@ namespace SudokuApp.Models
                     List<int> canEnter = new List<int>();
                     for (int y = 0; y < 9; ++y)
                     {
-                        if (_field[x, y] == val)
+                        if (Field[x, y] == val)
                         {
                             exist = true;
                         }
-                        if (_field[x, y] == -1 && _choices[x, y].Contains(val))
+                        if (Field[x, y] == -1 && _choices[x, y].Contains(val))
                         {
                             canEnter.Add(y);
                         }
@@ -266,11 +316,11 @@ namespace SudokuApp.Models
                     List<int> canEnter = new List<int>();
                     for (int x = 0; x < 9; ++x)
                     {
-                        if (_field[x, y] == val)
+                        if (Field[x, y] == val)
                         {
                             exist = true;
                         }
-                        if (_field[x, y] == -1 && _choices[x, y].Contains(val))
+                        if (Field[x, y] == -1 && _choices[x, y].Contains(val))
                         {
                             canEnter.Add(x);
                         }
@@ -294,11 +344,11 @@ namespace SudokuApp.Models
                         {
                             for (int y = by * 3; y < (by + 1) * 3; ++y)
                             {
-                                if (_field[x, y] == val)
+                                if (Field[x, y] == val)
                                 {
                                     exist = true;
                                 }
-                                if (_field[x, y] == -1 && _choices[x, y].Contains(val))
+                                if (Field[x, y] == -1 && _choices[x, y].Contains(val))
                                 {
                                     canEnter.Add((x, y));
                                 }
