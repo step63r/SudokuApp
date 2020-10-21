@@ -37,7 +37,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <!-- ボックス (0, 0) -->
-            <Grid Grid.Row="0" Grid.Column="0">
+            <Grid Grid.Row="0" Grid.Column="0" Margin="5">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -131,7 +131,7 @@
                 </Entry>
             </Grid>
             <!-- ボックス (0, 1) -->
-            <Grid Grid.Row="0" Grid.Column="1">
+            <Grid Grid.Row="0" Grid.Column="1" Margin="5">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -225,7 +225,7 @@
                 </Entry>
             </Grid>
             <!-- ボックス (0, 2) -->
-            <Grid Grid.Row="0" Grid.Column="2">
+            <Grid Grid.Row="0" Grid.Column="2" Margin="5">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -320,7 +320,7 @@
             </Grid>
 
             <!-- ボックス (1, 0) -->
-            <Grid Grid.Row="1" Grid.Column="0">
+            <Grid Grid.Row="1" Grid.Column="0" Margin="5">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -414,7 +414,7 @@
                 </Entry>
             </Grid>
             <!-- ボックス (1, 1) -->
-            <Grid Grid.Row="1" Grid.Column="1">
+            <Grid Grid.Row="1" Grid.Column="1" Margin="5">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -508,7 +508,7 @@
                 </Entry>
             </Grid>
             <!-- ボックス (1, 2) -->
-            <Grid Grid.Row="1" Grid.Column="2">
+            <Grid Grid.Row="1" Grid.Column="2" Margin="5">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -603,7 +603,7 @@
             </Grid>
 
             <!-- ボックス (2, 0) -->
-            <Grid Grid.Row="2" Grid.Column="0">
+            <Grid Grid.Row="2" Grid.Column="0" Margin="5">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -697,7 +697,7 @@
                 </Entry>
             </Grid>
             <!-- ボックス (2, 1) -->
-            <Grid Grid.Row="2" Grid.Column="1">
+            <Grid Grid.Row="2" Grid.Column="1" Margin="5">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -791,7 +791,7 @@
                 </Entry>
             </Grid>
             <!-- ボックス (2, 2) -->
-            <Grid Grid.Row="2" Grid.Column="2">
+            <Grid Grid.Row="2" Grid.Column="2" Margin="5">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>

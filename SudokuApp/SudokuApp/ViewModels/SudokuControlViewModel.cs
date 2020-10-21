@@ -108,6 +108,7 @@ namespace SudokuApp.ViewModels
 **9*****5
 ***2**7**
 31*******";
+
         /// <summary>
         /// Viewにバインドされているオブジェクトにサンプルの問題をセットする
         /// </summary>
@@ -138,6 +139,7 @@ namespace SudokuApp.ViewModels
                 }
             }
         }
+
         /// <summary>
         /// 数独オブジェクトの盤面を生成する
         /// </summary>
@@ -159,12 +161,46 @@ namespace SudokuApp.ViewModels
             }
         }
 
-        public void Execute()
+        /// <summary>
+        /// デバッグに結果をフォーマットして出力する
+        /// </summary>
+        /// <param name="src"></param>
+        private void DebugWriteSudokuFormat(List<int[,]> src)
         {
-            //var sudoku = Sudoku.DeepCopy();
-            var results = new List<int[,]>();
-            DepthFirstSearch(ref _sudoku, ref results);
-            //Sudoku = sudoku.DeepCopy();
+            int count = 1;
+            foreach (int[,] one_ret in src)
+            {
+                Debug.WriteLine(">>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                Debug.WriteLine($"Result: No. {count}");
+                Debug.WriteLine("    0 1 2   3 4 5   6 7 8  ");
+                Debug.WriteLine("  -------------------------");
+                for (int x = 0; x < 9; ++x)
+                {
+                    Debug.Write($"{x} | ");
+                    for (int y = 0; y < 9; ++y)
+                    {
+                        if (one_ret[x, y] == -1)
+                        {
+                            Debug.Write("* ");
+                        }
+                        else
+                        {
+                            Debug.Write($"{one_ret[x, y]} ");
+                        }
+                        if (y % 3 == 2)
+                        {
+                            Debug.Write("| ");
+                        }
+                    }
+                    Debug.WriteLine("");
+                    if (x % 3 == 2)
+                    {
+                        Debug.WriteLine("  -------------------------");
+                    }
+                }
+                Debug.WriteLine("<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+                count++;
+            }
         }
         #endregion
 
@@ -231,7 +267,6 @@ namespace SudokuApp.ViewModels
         {
             // 数独の盤面状態を保持しておく
             var boardPrev = board.DeepCopy();
-            //var boardPrev = fastJSON.JSON.DeepCopy(board);
 
             // 一意に自動的に決まるマスを埋める
             board.Process();
@@ -244,7 +279,6 @@ namespace SudokuApp.ViewModels
 
                 // リターンする前に一回元に戻す
                 board = boardPrev.DeepCopy();
-                //board = fastJSON.JSON.DeepCopy(boardPrev);
                 return;
             }
 
@@ -258,55 +292,11 @@ namespace SudokuApp.ViewModels
                 DepthFirstSearch(ref board, ref results);
                 board.Reset(x, y);
                 board = boardPrev.DeepCopy();
-                //board = fastJSON.JSON.DeepCopy(boardPrev);
             }
 
             // 元に戻す
             board = boardPrev.DeepCopy();
-            //board = fastJSON.JSON.DeepCopy(boardPrev);
         }
         #endregion
-
-        /// <summary>
-        /// [テスト用] デバッグに結果をフォーマットして出力する
-        /// </summary>
-        /// <param name="src"></param>
-        private void DebugWriteSudokuFormat(List<int[,]> src)
-        {
-            int count = 1;
-            foreach (int[,] one_ret in src)
-            {
-                Debug.WriteLine(">>>>>>>>>>>>>>>>>>>>>>>>>>>");
-                Debug.WriteLine($"Result: No. {count}");
-                Debug.WriteLine("    0 1 2   3 4 5   6 7 8  ");
-                Debug.WriteLine("  -------------------------");
-                for (int x = 0; x < 9; ++x)
-                {
-                    Debug.Write($"{x} | ");
-                    for (int y = 0; y < 9; ++y)
-                    {
-                        if (one_ret[x, y] == -1)
-                        {
-                            Debug.Write("* ");
-                        }
-                        else
-                        {
-                            Debug.Write($"{one_ret[x, y]} ");
-                        }
-                        if (y % 3 == 2)
-                        {
-                            Debug.Write("| ");
-                        }
-                    }
-                    Debug.WriteLine("");
-                    if (x % 3 == 2)
-                    {
-                        Debug.WriteLine("  -------------------------");
-                    }
-                }
-                Debug.WriteLine("<<<<<<<<<<<<<<<<<<<<<<<<<<<");
-                count++;
-            }
-        }
     }
 }

@@ -1,8 +1,4 @@
 ﻿using SudokuApp.Common;
-using SudokuApp.Models;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
 using Xamarin.Forms;
 
 namespace SudokuApp.ViewModels
@@ -13,23 +9,6 @@ namespace SudokuApp.ViewModels
     public class MainViewModel : ViewModelBase
     {
         #region プロパティ
-        private Sudoku _sudoku = new Sudoku();
-        /// <summary>
-        /// 数独クラス
-        /// </summary>
-        public Sudoku Sudoku
-        {
-            get
-            {
-                return _sudoku;
-            }
-            set
-            {
-                _sudoku = value;
-                OnPropertyChanged(nameof(_sudoku));
-                ExecuteSolveCommand.ChangeCanExecute();
-            }
-        }
         /// <summary>
         /// カメラ起動コマンド
         /// </summary>
