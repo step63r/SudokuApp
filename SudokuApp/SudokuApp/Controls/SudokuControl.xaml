@@ -17,6 +17,7 @@
         <x:Int32 x:Key="6">6</x:Int32>
         <x:Int32 x:Key="7">7</x:Int32>
         <x:Int32 x:Key="8">8</x:Int32>
+        <conv:NullableConverter x:Key="NullableConverter"/>
         <conv:MultiDimensionalConverter x:Key="MultiDimensionalConverter"/>
         <Style x:Key="SudokuCell" TargetType="{x:Type Entry}">
             <Setter Property="HorizontalTextAlignment" Value="Center"/>
@@ -48,15 +49,15 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="0" Text="{Binding DisplayBoard[0-0]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="1" Text="{Binding DisplayBoard[0-1]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="2" Text="{Binding DisplayBoard[0-2]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="0" Text="{Binding DisplayBoard[1-0]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="1" Text="{Binding DisplayBoard[1-1]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="2" Text="{Binding DisplayBoard[1-2]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="0" Text="{Binding DisplayBoard[2-0]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="1" Text="{Binding DisplayBoard[2-1]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="2" Text="{Binding DisplayBoard[2-2]}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="0" Text="{Binding DisplayBoard[0-0], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="1" Text="{Binding DisplayBoard[0-1], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="2" Text="{Binding DisplayBoard[0-2], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="0" Text="{Binding DisplayBoard[1-0], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="1" Text="{Binding DisplayBoard[1-1], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="2" Text="{Binding DisplayBoard[1-2], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="0" Text="{Binding DisplayBoard[2-0], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="1" Text="{Binding DisplayBoard[2-1], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="2" Text="{Binding DisplayBoard[2-2], Converter={StaticResource NullableConverter}}"/>
             </Grid>
             <!-- ボックス (0, 1) -->
             <Grid Grid.Row="0" Grid.Column="1" Margin="5">
@@ -70,15 +71,15 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="0" Text="{Binding DisplayBoard[0-3]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="1" Text="{Binding DisplayBoard[0-4]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="2" Text="{Binding DisplayBoard[0-5]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="0" Text="{Binding DisplayBoard[1-3]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="1" Text="{Binding DisplayBoard[1-4]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="2" Text="{Binding DisplayBoard[1-5]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="0" Text="{Binding DisplayBoard[2-3]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="1" Text="{Binding DisplayBoard[2-4]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="2" Text="{Binding DisplayBoard[2-5]}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="0" Text="{Binding DisplayBoard[0-3], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="1" Text="{Binding DisplayBoard[0-4], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="2" Text="{Binding DisplayBoard[0-5], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="0" Text="{Binding DisplayBoard[1-3], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="1" Text="{Binding DisplayBoard[1-4], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="2" Text="{Binding DisplayBoard[1-5], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="0" Text="{Binding DisplayBoard[2-3], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="1" Text="{Binding DisplayBoard[2-4], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="2" Text="{Binding DisplayBoard[2-5], Converter={StaticResource NullableConverter}}"/>
             </Grid>
             <!-- ボックス (0, 2) -->
             <Grid Grid.Row="0" Grid.Column="2" Margin="5">
@@ -92,15 +93,15 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="0" Text="{Binding DisplayBoard[0-6]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="1" Text="{Binding DisplayBoard[0-7]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="2" Text="{Binding DisplayBoard[0-8]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="0" Text="{Binding DisplayBoard[1-6]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="1" Text="{Binding DisplayBoard[1-7]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="2" Text="{Binding DisplayBoard[1-8]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="0" Text="{Binding DisplayBoard[2-6]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="1" Text="{Binding DisplayBoard[2-7]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="2" Text="{Binding DisplayBoard[2-8]}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="0" Text="{Binding DisplayBoard[0-6], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="1" Text="{Binding DisplayBoard[0-7], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="2" Text="{Binding DisplayBoard[0-8], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="0" Text="{Binding DisplayBoard[1-6], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="1" Text="{Binding DisplayBoard[1-7], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="2" Text="{Binding DisplayBoard[1-8], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="0" Text="{Binding DisplayBoard[2-6], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="1" Text="{Binding DisplayBoard[2-7], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="2" Text="{Binding DisplayBoard[2-8], Converter={StaticResource NullableConverter}}"/>
             </Grid>
 
             <!-- ボックス (1, 0) -->
@@ -115,15 +116,15 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="0" Text="{Binding DisplayBoard[3-0]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="1" Text="{Binding DisplayBoard[3-1]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="2" Text="{Binding DisplayBoard[3-2]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="0" Text="{Binding DisplayBoard[4-0]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="1" Text="{Binding DisplayBoard[4-1]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="2" Text="{Binding DisplayBoard[4-2]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="0" Text="{Binding DisplayBoard[5-0]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="1" Text="{Binding DisplayBoard[5-1]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="2" Text="{Binding DisplayBoard[5-2]}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="0" Text="{Binding DisplayBoard[3-0], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="1" Text="{Binding DisplayBoard[3-1], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="2" Text="{Binding DisplayBoard[3-2], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="0" Text="{Binding DisplayBoard[4-0], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="1" Text="{Binding DisplayBoard[4-1], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="2" Text="{Binding DisplayBoard[4-2], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="0" Text="{Binding DisplayBoard[5-0], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="1" Text="{Binding DisplayBoard[5-1], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="2" Text="{Binding DisplayBoard[5-2], Converter={StaticResource NullableConverter}}"/>
             </Grid>
             <!-- ボックス (1, 1) -->
             <Grid Grid.Row="1" Grid.Column="1" Margin="5">
@@ -137,15 +138,15 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="0" Text="{Binding DisplayBoard[3-3]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="1" Text="{Binding DisplayBoard[3-4]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="2" Text="{Binding DisplayBoard[3-5]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="0" Text="{Binding DisplayBoard[4-3]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="1" Text="{Binding DisplayBoard[4-4]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="2" Text="{Binding DisplayBoard[4-5]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="0" Text="{Binding DisplayBoard[5-3]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="1" Text="{Binding DisplayBoard[5-4]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="2" Text="{Binding DisplayBoard[5-5]}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="0" Text="{Binding DisplayBoard[3-3], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="1" Text="{Binding DisplayBoard[3-4], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="2" Text="{Binding DisplayBoard[3-5], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="0" Text="{Binding DisplayBoard[4-3], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="1" Text="{Binding DisplayBoard[4-4], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="2" Text="{Binding DisplayBoard[4-5], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="0" Text="{Binding DisplayBoard[5-3], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="1" Text="{Binding DisplayBoard[5-4], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="2" Text="{Binding DisplayBoard[5-5], Converter={StaticResource NullableConverter}}"/>
             </Grid>
             <!-- ボックス (1, 2) -->
             <Grid Grid.Row="1" Grid.Column="2" Margin="5">
@@ -159,15 +160,15 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="0" Text="{Binding DisplayBoard[3-6]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="1" Text="{Binding DisplayBoard[3-7]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="2" Text="{Binding DisplayBoard[3-8]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="0" Text="{Binding DisplayBoard[4-6]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="1" Text="{Binding DisplayBoard[4-7]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="2" Text="{Binding DisplayBoard[4-8]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="0" Text="{Binding DisplayBoard[5-6]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="1" Text="{Binding DisplayBoard[5-7]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="2" Text="{Binding DisplayBoard[5-8]}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="0" Text="{Binding DisplayBoard[3-6], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="1" Text="{Binding DisplayBoard[3-7], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="2" Text="{Binding DisplayBoard[3-8], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="0" Text="{Binding DisplayBoard[4-6], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="1" Text="{Binding DisplayBoard[4-7], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="2" Text="{Binding DisplayBoard[4-8], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="0" Text="{Binding DisplayBoard[5-6], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="1" Text="{Binding DisplayBoard[5-7], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="2" Text="{Binding DisplayBoard[5-8], Converter={StaticResource NullableConverter}}"/>
             </Grid>
 
             <!-- ボックス (2, 0) -->
@@ -182,15 +183,15 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="0" Text="{Binding DisplayBoard[6-0]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="1" Text="{Binding DisplayBoard[6-1]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="2" Text="{Binding DisplayBoard[6-2]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="0" Text="{Binding DisplayBoard[7-0]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="1" Text="{Binding DisplayBoard[7-1]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="2" Text="{Binding DisplayBoard[7-2]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="0" Text="{Binding DisplayBoard[8-0]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="1" Text="{Binding DisplayBoard[8-1]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="2" Text="{Binding DisplayBoard[8-2]}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="0" Text="{Binding DisplayBoard[6-0], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="1" Text="{Binding DisplayBoard[6-1], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="2" Text="{Binding DisplayBoard[6-2], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="0" Text="{Binding DisplayBoard[7-0], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="1" Text="{Binding DisplayBoard[7-1], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="2" Text="{Binding DisplayBoard[7-2], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="0" Text="{Binding DisplayBoard[8-0], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="1" Text="{Binding DisplayBoard[8-1], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="2" Text="{Binding DisplayBoard[8-2], Converter={StaticResource NullableConverter}}"/>
             </Grid>
             <!-- ボックス (2, 1) -->
             <Grid Grid.Row="2" Grid.Column="1" Margin="5">
@@ -204,15 +205,15 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="0" Text="{Binding DisplayBoard[6-3]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="1" Text="{Binding DisplayBoard[6-4]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="2" Text="{Binding DisplayBoard[6-5]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="0" Text="{Binding DisplayBoard[7-3]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="1" Text="{Binding DisplayBoard[7-4]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="2" Text="{Binding DisplayBoard[7-5]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="0" Text="{Binding DisplayBoard[8-3]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="1" Text="{Binding DisplayBoard[8-4]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="2" Text="{Binding DisplayBoard[8-5]}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="0" Text="{Binding DisplayBoard[6-3], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="1" Text="{Binding DisplayBoard[6-4], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="2" Text="{Binding DisplayBoard[6-5], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="0" Text="{Binding DisplayBoard[7-3], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="1" Text="{Binding DisplayBoard[7-4], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="2" Text="{Binding DisplayBoard[7-5], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="0" Text="{Binding DisplayBoard[8-3], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="1" Text="{Binding DisplayBoard[8-4], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="2" Text="{Binding DisplayBoard[8-5], Converter={StaticResource NullableConverter}}"/>
             </Grid>
             <!-- ボックス (2, 2) -->
             <Grid Grid.Row="2" Grid.Column="2" Margin="5">
@@ -226,15 +227,15 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="0" Text="{Binding DisplayBoard[6-6]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="1" Text="{Binding DisplayBoard[6-7]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="2" Text="{Binding DisplayBoard[6-8]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="0" Text="{Binding DisplayBoard[7-6]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="1" Text="{Binding DisplayBoard[7-7]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="2" Text="{Binding DisplayBoard[7-8]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="0" Text="{Binding DisplayBoard[8-6]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="1" Text="{Binding DisplayBoard[8-7]}"/>
-                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="2" Text="{Binding DisplayBoard[8-8]}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="0" Text="{Binding DisplayBoard[6-6], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="1" Text="{Binding DisplayBoard[6-7], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="0" Grid.Column="2" Text="{Binding DisplayBoard[6-8], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="0" Text="{Binding DisplayBoard[7-6], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="1" Text="{Binding DisplayBoard[7-7], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="1" Grid.Column="2" Text="{Binding DisplayBoard[7-8], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="0" Text="{Binding DisplayBoard[8-6], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="1" Text="{Binding DisplayBoard[8-7], Converter={StaticResource NullableConverter}}"/>
+                <Entry Style="{StaticResource SudokuCell}" Grid.Row="2" Grid.Column="2" Text="{Binding DisplayBoard[8-8], Converter={StaticResource NullableConverter}}"/>
             </Grid>
         </Grid>
     </ContentView.Content>

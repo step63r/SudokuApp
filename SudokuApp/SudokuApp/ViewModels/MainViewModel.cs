@@ -17,6 +17,10 @@ namespace SudokuApp.ViewModels
         /// 数独解答コマンド
         /// </summary>
         public Command ExecuteSolveCommand { get; private set; }
+        /// <summary>
+        /// 消去コマンド
+        /// </summary>
+        public Command ExecuteClearCommand { get; private set; }
         #endregion
 
         #region コンストラクタ
@@ -27,6 +31,7 @@ namespace SudokuApp.ViewModels
         {
             ExecuteCameraCommand = new Command(ExecuteCamera, CanExecuteCamera);
             ExecuteSolveCommand = new Command(ExecuteSolve, CanExecuteSolve);
+            ExecuteClearCommand = new Command(ExecuteClear, CanExecuteClear);
         }
         #endregion
 
@@ -59,6 +64,22 @@ namespace SudokuApp.ViewModels
         /// </summary>
         /// <returns></returns>
         private bool CanExecuteSolve()
+        {
+            return true;
+        }
+
+        /// <summary>
+        /// 消去を実行する
+        /// </summary>
+        public void ExecuteClear()
+        {
+            MessagingCenter.Send(this, "ExecuteClear");
+        }
+        /// <summary>
+        /// 消去が実行可能かどうか
+        /// </summary>
+        /// <returns></returns>
+        private bool CanExecuteClear()
         {
             return true;
         }

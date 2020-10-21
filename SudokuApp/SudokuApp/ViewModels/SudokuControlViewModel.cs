@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -222,7 +223,7 @@ namespace SudokuApp.ViewModels
                 }
                 else
                 {
-                    var board = new BindableTwoDArray<int?>(9, 9); ;
+                    var board = new BindableTwoDArray<int?>(9, 9);
                     for (int x = 0; x < 9; ++x)
                     {
                         for (int y = 0; y < 9; ++y)
@@ -233,6 +234,13 @@ namespace SudokuApp.ViewModels
                     DisplayBoard = board;
                     OnPropertyChanged(nameof(DisplayBoard));
                 }
+            });
+
+            MessagingCenter.Subscribe<MainViewModel>(this, "ExecuteClear", (sender) =>
+            {
+                Sudoku = new Sudoku();
+                DisplayBoard = new BindableTwoDArray<int?>(9, 9);
+                OnPropertyChanged(nameof(DisplayBoard));
             });
 
             //SetAllValuesToDisplay(_extremeString);
