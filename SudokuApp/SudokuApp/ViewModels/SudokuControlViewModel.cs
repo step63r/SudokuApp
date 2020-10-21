@@ -2,6 +2,7 @@
 using SudokuApp.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
@@ -34,7 +35,7 @@ namespace SudokuApp.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        public string[,] DisplayBoard
+        public BindableTwoDArray<int?> DisplayBoard
         {
             get
             {
@@ -56,7 +57,7 @@ namespace SudokuApp.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        private string[,] _displayBoard = new string[9, 9];
+        private BindableTwoDArray<int?> _displayBoard = new BindableTwoDArray<int?>(9, 9);
         #endregion
 
         #region サンプル
@@ -134,7 +135,7 @@ namespace SudokuApp.ViewModels
                         {
                             continue;
                         }
-                        DisplayBoard[x, y] = line.Substring(y, 1);
+                        DisplayBoard[x, y] = int.Parse(line.Substring(y, 1));
                     }
                 }
             }
@@ -144,7 +145,7 @@ namespace SudokuApp.ViewModels
         /// 数独オブジェクトの盤面を生成する
         /// </summary>
         /// <param name="values"></param>
-        private void PutAllValuesFromString(string[,] values)
+        private void PutAllValuesFromString(BindableTwoDArray<int?> values)
         {
             for (int x = 0; x < 9; ++x)
             {
@@ -152,11 +153,11 @@ namespace SudokuApp.ViewModels
                 for (int y = 0; y < 9; ++y)
                 {
                     // 空マスの場合は何もしない
-                    if (string.IsNullOrEmpty(DisplayBoard[x, y]))
+                    if (DisplayBoard[x, y] == null)
                     {
                         continue;
                     }
-                    Sudoku.Put(x, y, int.Parse(DisplayBoard[x, y]));
+                    Sudoku.Put(x, y, (int)DisplayBoard[x, y]);
                 }
             }
         }
@@ -215,19 +216,26 @@ namespace SudokuApp.ViewModels
             {
                 PutAllValuesFromString(DisplayBoard);
                 int[,] ret = await ExecuteAsync();
-                string[,] board = new string[9, 9];
-                for (int x = 0; x < 9; ++x)
+                if (ret == null)
                 {
-                    for (int y = 0; y < 9; ++y)
-                    {
-                        board[x, y] = ret[x, y].ToString();
-                    }
+                    Debug.WriteLine("答えが見つかりませんでした…");
                 }
-                DisplayBoard = board;
-                OnPropertyChanged(nameof(DisplayBoard));
+                else
+                {
+                    var board = new BindableTwoDArray<int?>(9, 9); ;
+                    for (int x = 0; x < 9; ++x)
+                    {
+                        for (int y = 0; y < 9; ++y)
+                        {
+                            board[x, y] = ret[x, y];
+                        }
+                    }
+                    DisplayBoard = board;
+                    OnPropertyChanged(nameof(DisplayBoard));
+                }
             });
 
-            SetAllValuesToDisplay(_extremeString);
+            //SetAllValuesToDisplay(_extremeString);
         }
         #endregion
 
@@ -255,6 +263,10 @@ namespace SudokuApp.ViewModels
             {   
                 DepthFirstSearch(ref _sudoku, ref results);
             }).ConfigureAwait(false);
+            if (results.Count == 0)
+            {
+                return default;
+            }
             return results[0];
         }
 
