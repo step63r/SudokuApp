@@ -8,6 +8,7 @@ namespace SudokuApp.Models
     /// <summary>
     /// 数独の盤面情報クラス
     /// </summary>
+    [Serializable]
     public class Sudoku : INotifyPropertyChanged
     {
         #region INotifyPropertyChanged
@@ -30,7 +31,7 @@ namespace SudokuApp.Models
             set
             {
                 _field = value;
-                PropertyChanged(this, new PropertyChangedEventArgs(nameof(Field)));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Field)));
             }
         }
         #endregion
@@ -69,31 +70,6 @@ namespace SudokuApp.Models
                     _choices[x, y] = new SortedSet<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
                 }
             }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public Sudoku DeepCopy()
-        {
-            var obj = (Sudoku)MemberwiseClone();
-            obj.Field = new int[9, 9];
-            obj._nums = new int[9, 9, 9];
-            obj._choices = new SortedSet<int>[9, 9];
-            for (int x = 0; x < 9; ++x)
-            {
-                for (int y = 0; y < 9; ++y)
-                {
-                    obj.Field[x, y] = Field[x, y];
-                    for (int i = 0; i < 9; ++i)
-                    {
-                        obj._nums[x, y, i] = _nums[x, y, i];
-                    }
-                    obj._choices[x, y] = _choices[x, y];
-                }
-            }
-            return obj;
         }
 
         ///// <summary>
@@ -289,7 +265,7 @@ namespace SudokuApp.Models
                 for (int x = 0; x < 9; ++x)
                 {
                     bool exist = false;
-                    List<int> canEnter = new List<int>();
+                    var canEnter = new List<int>();
                     for (int y = 0; y < 9; ++y)
                     {
                         if (Field[x, y] == val)
@@ -313,7 +289,7 @@ namespace SudokuApp.Models
                 for (int y = 0; y < 9; ++y)
                 {
                     bool exist = false;
-                    List<int> canEnter = new List<int>();
+                    var canEnter = new List<int>();
                     for (int x = 0; x < 9; ++x)
                     {
                         if (Field[x, y] == val)
@@ -339,7 +315,7 @@ namespace SudokuApp.Models
                     for (int by = 0; by < 3; ++by)
                     {
                         bool exist = false;
-                        List<(int, int)> canEnter = new List<(int, int)>();
+                        var canEnter = new List<(int, int)>();
                         for (int x = bx * 3; x < (bx + 1) * 3; ++x)
                         {
                             for (int y = by * 3; y < (by + 1) * 3; ++y)

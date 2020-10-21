@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SudokuApp.Android", "Sudoku
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SudokuApp.iOS", "SudokuApp\SudokuApp.iOS\SudokuApp.iOS.csproj", "{CCAA64F3-D1DB-4070-9005-270C12F66757}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SudokuApp", "SudokuApp\SudokuApp\SudokuApp.csproj", "{604E0860-1E4C-427B-B039-048752874841}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SudokuApp", "SudokuApp\SudokuApp\SudokuApp.csproj", "{604E0860-1E4C-427B-B039-048752874841}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -64,7 +64,6 @@ Global
 		{3AD9A48C-BDBF-4D02-A505-71DFCFF713B0}.Release|x86.Build.0 = Release|x86
 		{3AD9A48C-BDBF-4D02-A505-71DFCFF713B0}.Release|x86.Deploy.0 = Release|x86
 		{195546A3-8413-4206-9CAC-02A4B786B921}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{195546A3-8413-4206-9CAC-02A4B786B921}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{195546A3-8413-4206-9CAC-02A4B786B921}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{195546A3-8413-4206-9CAC-02A4B786B921}.Debug|ARM.ActiveCfg = Debug|Any CPU
 		{195546A3-8413-4206-9CAC-02A4B786B921}.Debug|ARM.Build.0 = Debug|Any CPU
@@ -82,7 +81,6 @@ Global
 		{195546A3-8413-4206-9CAC-02A4B786B921}.Debug|x86.Build.0 = Debug|Any CPU
 		{195546A3-8413-4206-9CAC-02A4B786B921}.Debug|x86.Deploy.0 = Debug|Any CPU
 		{195546A3-8413-4206-9CAC-02A4B786B921}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{195546A3-8413-4206-9CAC-02A4B786B921}.Release|Any CPU.Build.0 = Release|Any CPU
 		{195546A3-8413-4206-9CAC-02A4B786B921}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{195546A3-8413-4206-9CAC-02A4B786B921}.Release|ARM.ActiveCfg = Release|Any CPU
 		{195546A3-8413-4206-9CAC-02A4B786B921}.Release|ARM.Build.0 = Release|Any CPU
@@ -100,7 +98,6 @@ Global
 		{195546A3-8413-4206-9CAC-02A4B786B921}.Release|x86.Build.0 = Release|Any CPU
 		{195546A3-8413-4206-9CAC-02A4B786B921}.Release|x86.Deploy.0 = Release|Any CPU
 		{CCAA64F3-D1DB-4070-9005-270C12F66757}.Debug|Any CPU.ActiveCfg = Debug|iPhoneSimulator
-		{CCAA64F3-D1DB-4070-9005-270C12F66757}.Debug|Any CPU.Build.0 = Debug|iPhoneSimulator
 		{CCAA64F3-D1DB-4070-9005-270C12F66757}.Debug|Any CPU.Deploy.0 = Debug|iPhoneSimulator
 		{CCAA64F3-D1DB-4070-9005-270C12F66757}.Debug|ARM.ActiveCfg = Debug|iPhone
 		{CCAA64F3-D1DB-4070-9005-270C12F66757}.Debug|ARM.Build.0 = Debug|iPhone
@@ -118,7 +115,6 @@ Global
 		{CCAA64F3-D1DB-4070-9005-270C12F66757}.Debug|x86.Build.0 = Debug|iPhoneSimulator
 		{CCAA64F3-D1DB-4070-9005-270C12F66757}.Debug|x86.Deploy.0 = Debug|iPhoneSimulator
 		{CCAA64F3-D1DB-4070-9005-270C12F66757}.Release|Any CPU.ActiveCfg = Release|iPhoneSimulator
-		{CCAA64F3-D1DB-4070-9005-270C12F66757}.Release|Any CPU.Build.0 = Release|iPhoneSimulator
 		{CCAA64F3-D1DB-4070-9005-270C12F66757}.Release|Any CPU.Deploy.0 = Release|iPhoneSimulator
 		{CCAA64F3-D1DB-4070-9005-270C12F66757}.Release|ARM.ActiveCfg = Release|iPhoneSimulator
 		{CCAA64F3-D1DB-4070-9005-270C12F66757}.Release|ARM.Build.0 = Release|iPhoneSimulator
