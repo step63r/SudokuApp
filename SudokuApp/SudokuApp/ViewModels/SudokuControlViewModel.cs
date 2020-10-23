@@ -1,12 +1,9 @@
-﻿using SudokuApp.Common;
+﻿using Plugin.Toasts;
+using SudokuApp.Common;
+using SudokuApp.Debug;
 using SudokuApp.Models;
-using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.IO;
-using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -34,7 +31,7 @@ namespace SudokuApp.ViewModels
             }
         }
         /// <summary>
-        /// 
+        /// 画面に表示する盤面
         /// </summary>
         public BindableTwoDArray<int?> DisplayBoard
         {
@@ -56,61 +53,12 @@ namespace SudokuApp.ViewModels
         /// </summary>
         private Sudoku _sudoku = new Sudoku();
         /// <summary>
-        /// 
+        /// 画面に表示する盤面
         /// </summary>
         private BindableTwoDArray<int?> _displayBoard = new BindableTwoDArray<int?>(9, 9);
         #endregion
 
         #region サンプル
-        /// <summary>
-        /// サンプル問題（初級）
-        /// </summary>
-        private readonly string _easyString = $@"3***4****
-**82*6*9*
-****1***5
-*5*674***
-49*38*25*
-**1**2*87
-1*973*6*4
-2*34*8519
-56*1293*8";
-        /// <summary>
-        /// サンプル問題（中級）
-        /// </summary>
-        private readonly string _nornalString = $@"***4****9
-*34*8****
-7163****4
-*73****4*
-*****31**
-642**73**
-5********
-****1*96*
-***56**8*";
-        /// <summary>
-        /// サンプル問題（上級）
-        /// </summary>
-        private readonly string _hardString = $@"3*5*1**4*
-*****7***
-**8*****3
-*4*6*17*2
-6**4**1**
-*3*******
-9**2*6**7
-*56*74**8
-****3****";
-        /// <summary>
-        /// サンプル問題（最高級）
-        /// </summary>
-        private readonly string _extremeString = $@"*****6***
-**3*59***
-******2**
-4********
-27*4*****
-*******69
-**9*****5
-***2**7**
-31*******";
-
         /// <summary>
         /// Viewにバインドされているオブジェクトにサンプルの問題をセットする
         /// </summary>
@@ -141,69 +89,6 @@ namespace SudokuApp.ViewModels
                 }
             }
         }
-
-        /// <summary>
-        /// 数独オブジェクトの盤面を生成する
-        /// </summary>
-        /// <param name="values"></param>
-        private void PutAllValuesFromString(BindableTwoDArray<int?> values)
-        {
-            for (int x = 0; x < 9; ++x)
-            {
-                
-                for (int y = 0; y < 9; ++y)
-                {
-                    // 空マスの場合は何もしない
-                    if (DisplayBoard[x, y] == null)
-                    {
-                        continue;
-                    }
-                    Sudoku.Put(x, y, (int)DisplayBoard[x, y]);
-                }
-            }
-        }
-
-        /// <summary>
-        /// デバッグに結果をフォーマットして出力する
-        /// </summary>
-        /// <param name="src"></param>
-        private void DebugWriteSudokuFormat(List<int[,]> src)
-        {
-            int count = 1;
-            foreach (int[,] one_ret in src)
-            {
-                Debug.WriteLine(">>>>>>>>>>>>>>>>>>>>>>>>>>>");
-                Debug.WriteLine($"Result: No. {count}");
-                Debug.WriteLine("    0 1 2   3 4 5   6 7 8  ");
-                Debug.WriteLine("  -------------------------");
-                for (int x = 0; x < 9; ++x)
-                {
-                    Debug.Write($"{x} | ");
-                    for (int y = 0; y < 9; ++y)
-                    {
-                        if (one_ret[x, y] == -1)
-                        {
-                            Debug.Write("* ");
-                        }
-                        else
-                        {
-                            Debug.Write($"{one_ret[x, y]} ");
-                        }
-                        if (y % 3 == 2)
-                        {
-                            Debug.Write("| ");
-                        }
-                    }
-                    Debug.WriteLine("");
-                    if (x % 3 == 2)
-                    {
-                        Debug.WriteLine("  -------------------------");
-                    }
-                }
-                Debug.WriteLine("<<<<<<<<<<<<<<<<<<<<<<<<<<<");
-                count++;
-            }
-        }
         #endregion
 
         #region コンストラクタ
@@ -215,11 +100,38 @@ namespace SudokuApp.ViewModels
             // メッセージの購読
             MessagingCenter.Subscribe<MainViewModel>(this, "ExecuteAsync", async (sender) =>
             {
-                PutAllValuesFromString(DisplayBoard);
+                // 盤面を数独オブジェクトにコピーする
+                for (int x = 0; x < 9; ++x)
+                {
+
+                    for (int y = 0; y < 9; ++y)
+                    {
+                        // 空マスの場合は何もしない
+                        if (DisplayBoard[x, y] == null)
+                        {
+                            continue;
+                        }
+                        Sudoku.Put(x, y, (int)DisplayBoard[x, y]);
+                    }
+                }
+
                 int[,] ret = await ExecuteAsync();
                 if (ret == null)
                 {
-                    Debug.WriteLine("答えが見つかりませんでした…");
+                    var notificator = DependencyService.Get<IToastNotificator>();
+                    if (notificator != null)
+                    {
+                        var androidOptions = new AndroidOptions
+                        {
+                            DismissText = ""
+                        };
+                        var options = new NotificationOptions()
+                        {
+                            Title = "答えが見つかりませんでした…",
+                            AndroidOptions = androidOptions,
+                        };
+                        await notificator.Notify(options);
+                    }
                 }
                 else
                 {
@@ -243,7 +155,7 @@ namespace SudokuApp.ViewModels
                 OnPropertyChanged(nameof(DisplayBoard));
             });
 
-            //SetAllValuesToDisplay(_extremeString);
+            SetAllValuesToDisplay(Samples.Extreme);
         }
         #endregion
 
