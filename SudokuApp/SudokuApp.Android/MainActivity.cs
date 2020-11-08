@@ -2,6 +2,8 @@
 using Android.Content.PM;
 using Android.Runtime;
 using Android.OS;
+using Xamarin.Forms;
+using Plugin.Toasts;
 using System.Threading.Tasks;
 using System.IO;
 using Android.Content;
@@ -39,9 +41,21 @@ namespace SudokuApp.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(savedInstanceState);
+
+            // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+            // Toasts.Forms.Plugin
+            DependencyService.Register<ToastNotification>();
+            var platformOptions = new PlatformOptions
+            {
+                Style = NotificationStyle.Snackbar
+            };
+            ToastNotification.Init(this, platformOptions);
+            // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
             Instance = this;
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+
             LoadApplication(new App());
         }
 
