@@ -243,6 +243,13 @@ namespace SudokuApp.ViewModels
                 OnPropertyChanged(nameof(DisplayBoard));
             });
 
+            MessagingCenter.Subscribe<MainViewModel, BindableTwoDArray<int?>>(this, "ExecutePickPhoto", (sender, array) =>
+            {
+                Sudoku = new Sudoku();
+                DisplayBoard = array;
+                OnPropertyChanged(nameof(DisplayBoard));
+            });
+
             //SetAllValuesToDisplay(_extremeString);
         }
         #endregion

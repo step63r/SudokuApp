@@ -1,5 +1,6 @@
 ﻿using SudokuApp.Common;
 using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 
 namespace SudokuApp.ViewModels
 {
@@ -21,6 +22,10 @@ namespace SudokuApp.ViewModels
         /// 消去コマンド
         /// </summary>
         public Command ExecuteClearCommand { get; private set; }
+        /// <summary>
+        /// 画像選択コマンド
+        /// </summary>
+        public Command ExecutePickPhotoCommand { get; private set; }
         #endregion
 
         #region コンストラクタ
@@ -32,6 +37,7 @@ namespace SudokuApp.ViewModels
             ExecuteCameraCommand = new Command(ExecuteCamera, CanExecuteCamera);
             ExecuteSolveCommand = new Command(ExecuteSolve, CanExecuteSolve);
             ExecuteClearCommand = new Command(ExecuteClear, CanExecuteClear);
+            ExecutePickPhotoCommand = new Command(ExecutePickPhoto, CanExecutePickPhoto);
         }
         #endregion
 
@@ -80,6 +86,28 @@ namespace SudokuApp.ViewModels
         /// </summary>
         /// <returns></returns>
         private bool CanExecuteClear()
+        {
+            return true;
+        }
+
+        /// <summary>
+        /// 画像選択を実行する
+        /// </summary>
+        public async void ExecutePickPhoto()
+        {
+            var stream = await DependencyService.Get<IPhotoPickerService>().GetImageStreamAsync();
+            if (stream != null)
+            {
+                // TODO: 読み取った画像をAzure Cognitive Servicesで認識させ、読み取った配列を格納する
+                var array = new BindableTwoDArray<int?>(9, 9);
+                MessagingCenter.Send(this, "ExecutePickPhoto", array);
+            }
+        }
+        /// <summary>
+        /// 画像選択が実行可能かどうか
+        /// </summary>
+        /// <returns></returns>
+        private bool CanExecutePickPhoto()
         {
             return true;
         }
