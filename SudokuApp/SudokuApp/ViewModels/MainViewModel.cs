@@ -1,6 +1,5 @@
 ﻿using SudokuApp.Common;
 using Xamarin.Forms;
-using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 
 namespace SudokuApp.ViewModels
 {
@@ -98,6 +97,7 @@ namespace SudokuApp.ViewModels
             var stream = await DependencyService.Get<IPhotoPickerService>().GetImageStreamAsync();
             if (stream != null)
             {
+                var result = await ComputerVisionManager.ReadFileLocal(stream);
                 // TODO: 読み取った画像をAzure Cognitive Servicesで認識させ、読み取った配列を格納する
                 var array = new BindableTwoDArray<int?>(9, 9);
                 MessagingCenter.Send(this, "ExecutePickPhoto", array);
