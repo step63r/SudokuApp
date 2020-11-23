@@ -96,6 +96,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\FrameDetectService.cs" />
     <Compile Include="Services\PhotoPickerService.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -152,6 +153,10 @@
     <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\OpenCVBridge\OpenCVBridge.vcxproj">
+      <Project>{b14b2f7c-9e3e-4a89-926f-5328ea77e8f9}</Project>
+      <Name>OpenCVBridge</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SudokuApp\SudokuApp.csproj">
       <Project>{4A66861A-6CA5-44F5-AB45-4AFA1F1232E3}</Project>
       <Name>SudokuApp</Name>
