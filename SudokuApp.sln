@@ -17,8 +17,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OpenCVBridge", "OpenCVBridge\OpenCVBridge.vcxproj", "{B14B2F7C-9E3E-4A89-926F-5328EA77E8F9}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -191,28 +189,6 @@ Global
 		{604E0860-1E4C-427B-B039-048752874841}.Release|x86.ActiveCfg = Release|Any CPU
 		{604E0860-1E4C-427B-B039-048752874841}.Release|x86.Build.0 = Release|Any CPU
 		{604E0860-1E4C-427B-B039-048752874841}.Release|x86.Deploy.0 = Release|Any CPU
-		{B14B2F7C-9E3E-4A89-926F-5328EA77E8F9}.Debug|Any CPU.ActiveCfg = Debug|Win32
-		{B14B2F7C-9E3E-4A89-926F-5328EA77E8F9}.Debug|ARM.ActiveCfg = Debug|ARM
-		{B14B2F7C-9E3E-4A89-926F-5328EA77E8F9}.Debug|ARM.Build.0 = Debug|ARM
-		{B14B2F7C-9E3E-4A89-926F-5328EA77E8F9}.Debug|ARM64.ActiveCfg = Debug|ARM64
-		{B14B2F7C-9E3E-4A89-926F-5328EA77E8F9}.Debug|ARM64.Build.0 = Debug|ARM64
-		{B14B2F7C-9E3E-4A89-926F-5328EA77E8F9}.Debug|iPhone.ActiveCfg = Debug|Win32
-		{B14B2F7C-9E3E-4A89-926F-5328EA77E8F9}.Debug|iPhoneSimulator.ActiveCfg = Debug|Win32
-		{B14B2F7C-9E3E-4A89-926F-5328EA77E8F9}.Debug|x64.ActiveCfg = Debug|x64
-		{B14B2F7C-9E3E-4A89-926F-5328EA77E8F9}.Debug|x64.Build.0 = Debug|x64
-		{B14B2F7C-9E3E-4A89-926F-5328EA77E8F9}.Debug|x86.ActiveCfg = Debug|Win32
-		{B14B2F7C-9E3E-4A89-926F-5328EA77E8F9}.Debug|x86.Build.0 = Debug|Win32
-		{B14B2F7C-9E3E-4A89-926F-5328EA77E8F9}.Release|Any CPU.ActiveCfg = Release|Win32
-		{B14B2F7C-9E3E-4A89-926F-5328EA77E8F9}.Release|ARM.ActiveCfg = Release|ARM
-		{B14B2F7C-9E3E-4A89-926F-5328EA77E8F9}.Release|ARM.Build.0 = Release|ARM
-		{B14B2F7C-9E3E-4A89-926F-5328EA77E8F9}.Release|ARM64.ActiveCfg = Release|ARM64
-		{B14B2F7C-9E3E-4A89-926F-5328EA77E8F9}.Release|ARM64.Build.0 = Release|ARM64
-		{B14B2F7C-9E3E-4A89-926F-5328EA77E8F9}.Release|iPhone.ActiveCfg = Release|Win32
-		{B14B2F7C-9E3E-4A89-926F-5328EA77E8F9}.Release|iPhoneSimulator.ActiveCfg = Release|Win32
-		{B14B2F7C-9E3E-4A89-926F-5328EA77E8F9}.Release|x64.ActiveCfg = Release|x64
-		{B14B2F7C-9E3E-4A89-926F-5328EA77E8F9}.Release|x64.Build.0 = Release|x64
-		{B14B2F7C-9E3E-4A89-926F-5328EA77E8F9}.Release|x86.ActiveCfg = Release|Win32
-		{B14B2F7C-9E3E-4A89-926F-5328EA77E8F9}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
