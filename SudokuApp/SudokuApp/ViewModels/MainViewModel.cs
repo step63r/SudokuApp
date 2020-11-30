@@ -119,6 +119,10 @@ namespace SudokuApp.ViewModels
         /// </summary>
         public void ExecuteSolve()
         {
+            // TODO: 
+            // MessagingCenterに戻り値っぽいものが実現すれば
+            // ここでIsRunningを使える
+            // 今は、全マスが空のまま実行すると戻ってこれない…
             MessagingCenter.Send(this, "ExecuteAsync");
         }
         /// <summary>
@@ -175,6 +179,13 @@ namespace SudokuApp.ViewModels
                 RunningStatus = "文字列認識中（Custom Vision）";
                 // Computer Visionによる文字認識結果
                 var cvResult = await ComputerVisionManager.ReadFileLocal(stream);
+                if (cvResult == null || cvResult.Count == 0)
+                {
+                    await Application.Current.MainPage.DisplayAlert("ERROR", "文字列の認識に失敗しました", "OK");
+                    IsRunning = false;
+                    return;
+                }
+
                 var detectedNumbers = GetDetectedNumbers(cvResult[0]);
 
                 RunningStatus = "フレーム認識中（Azure Functions）";
@@ -192,6 +203,13 @@ namespace SudokuApp.ViewModels
                     {
                         string strResponseBody = await response.Content.ReadAsStringAsync();
                         var detectedFrames = JsonConvert.DeserializeObject<List<List<List<int>>>>(strResponseBody);
+
+                        if (detectedFrames.Count != 81)
+                        {
+                            await Application.Current.MainPage.DisplayAlert("ERROR", "フレームが正しく検出できませんでした", "OK");
+                            IsRunning = false;
+                            return;
+                        }
 
                         // 検出された数値がフレームに収まっているかを確認
                         foreach (var detectedNumber in detectedNumbers)
@@ -216,7 +234,7 @@ namespace SudokuApp.ViewModels
                                         numPointInPolygon++;
                                     }
                                 }
-                                if (numPointInPolygon == detectedNumber.Points.Count)
+                                if (numPointInPolygon >= detectedNumber.Points.Count / 2)
                                 {
                                     var (row, col) = GetRowColIndex(frameIndex);
                                     sudokuArray[row, col] = detectedNumber.Number;
@@ -227,12 +245,16 @@ namespace SudokuApp.ViewModels
                     }
                     else
                     {
-                        throw new Exception($"{nameof(response)} is null");
+                        await Application.Current.MainPage.DisplayAlert("ERROR", "フレーム検出のリクエストに失敗しました", "OK");
+                        IsRunning = false;
+                        return;
                     }
                 }
                 else
                 {
-                    throw new Exception($"{nameof(byteStreamArray)} is null");
+                    await Application.Current.MainPage.DisplayAlert("ERROR", "画像の読み込みに失敗しました", "OK");
+                    IsRunning = false;
+                    return;
                 }
 
                 MessagingCenter.Send(this, "ExecutePickPhoto", sudokuArray);

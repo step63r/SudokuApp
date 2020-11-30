@@ -99,6 +99,7 @@ namespace SudokuApp.ViewModels
             // メッセージの購読
             MessagingCenter.Subscribe<MainViewModel>(this, "ExecuteAsync", async (sender) =>
             {
+                Sudoku = new Sudoku();
                 // 盤面を数独オブジェクトにコピーする
                 for (int x = 0; x < 9; ++x)
                 {
@@ -117,20 +118,7 @@ namespace SudokuApp.ViewModels
                 int[,] ret = await ExecuteAsync();
                 if (ret == null)
                 {
-                    var notificator = DependencyService.Get<IToastNotificator>();
-                    if (notificator != null)
-                    {
-                        var androidOptions = new AndroidOptions
-                        {
-                            DismissText = ""
-                        };
-                        var options = new NotificationOptions()
-                        {
-                            Title = "答えが見つかりませんでした…",
-                            AndroidOptions = androidOptions,
-                        };
-                        await notificator.Notify(options);
-                    }
+                    await Application.Current.MainPage.DisplayAlert("WARNING", "解答できませんでした…", "OK");
                 }
                 else
                 {
