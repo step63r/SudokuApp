@@ -211,7 +211,7 @@ namespace SudokuApp.ViewModels
                 // ストリームの位置を戻す
                 stream.Seek(0, SeekOrigin.Begin);
 
-                RunningStatus = "文字列認識中（Custom Vision）";
+                RunningStatus = "文字列認識中（Computer Vision）";
                 // Computer Visionによる文字認識結果
                 var cvResult = await ComputerVisionManager.ReadFileLocal(stream);
                 if (cvResult == null || cvResult.Count == 0)
