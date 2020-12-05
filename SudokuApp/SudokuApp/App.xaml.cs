@@ -9,6 +9,7 @@ namespace SudokuApp
         public App()
         {
             InitializeComponent();
+            Plugin.Media.CrossMedia.Current.Initialize();
 
             MainPage = new MainPage();
         }

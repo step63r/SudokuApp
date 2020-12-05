@@ -1,10 +1,13 @@
 ﻿using Microsoft.Azure.CognitiveServices.Vision.ComputerVision.Models;
 using Newtonsoft.Json;
+using Plugin.Media;
+using Plugin.Media.Abstractions;
 using SudokuApp.Common;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace SudokuApp.ViewModels
@@ -101,9 +104,20 @@ namespace SudokuApp.ViewModels
         /// <summary>
         /// カメラ起動
         /// </summary>
-        public void ExecuteCamera()
+        public async void ExecuteCamera()
         {
-
+            var mediaOptions = new StoreCameraMediaOptions
+            {
+                AllowCropping = false,
+                DefaultCamera = CameraDevice.Rear,
+                Directory = "SudokuPicture",
+                Name = $"{DateTime.UtcNow.ToLongDateString()}.jpg"
+            };
+            var file = await CrossMedia.Current.TakePhotoAsync(mediaOptions);
+            if (file != null)
+            {
+                await AnalyzePicture(file.GetStream());
+            }
         }
         /// <summary>
         /// カメラ起動が実行可能か
@@ -111,7 +125,7 @@ namespace SudokuApp.ViewModels
         /// <returns></returns>
         private bool CanExecuteCamera()
         {
-            return false;
+            return CrossMedia.Current.IsTakePhotoSupported;
         }
 
         /// <summary>
@@ -156,6 +170,27 @@ namespace SudokuApp.ViewModels
         public async void ExecutePickPhoto()
         {
             var stream = await DependencyService.Get<IPhotoPickerService>().GetImageStreamAsync();
+            if (stream != null)
+            {
+                await AnalyzePicture(stream);
+            }
+        }
+        /// <summary>
+        /// 画像選択が実行可能かどうか
+        /// </summary>
+        /// <returns></returns>
+        private bool CanExecutePickPhoto()
+        {
+            return true;
+        }
+
+        /// <summary>
+        /// 画像ストリームを読み込んで数字と枠の検出を行う
+        /// </summary>
+        /// <param name="stream">ファイルストリーム</param>
+        /// <returns></returns>
+        private async Task AnalyzePicture(Stream stream)
+        {
             if (stream != null)
             {
                 IsRunning = true;
@@ -260,14 +295,6 @@ namespace SudokuApp.ViewModels
                 MessagingCenter.Send(this, "ExecutePickPhoto", sudokuArray);
                 IsRunning = false;
             }
-        }
-        /// <summary>
-        /// 画像選択が実行可能かどうか
-        /// </summary>
-        /// <returns></returns>
-        private bool CanExecutePickPhoto()
-        {
-            return true;
         }
 
         /// <summary>
